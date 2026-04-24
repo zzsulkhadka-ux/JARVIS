@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>J.A.R.V.I.S — IRON CORE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- MATRIX BG -->
+  <canvas id="matrixBg"></canvas>
+
+  <!-- ═══════════════════════════════
+       INTRO SEQUENCE
+  ═══════════════════════════════ -->
+  <div id="intro">
+
+    <!-- Phase 1: Glitch Hack -->
+    <div id="phaseHack" class="phase active">
+      <canvas id="hackCanvas"></canvas>
+      <div class="hack-text" id="hackText"></div>
+      <div class="hack-overlay"></div>
+    </div>
+
+    <!-- Phase 2: Code Rain 3D -->
+    <div id="phaseCode" class="phase">
+      <canvas id="codeCanvas3d"></canvas>
+      <div class="code-center-text">BYPASSING SECURITY PROTOCOLS...</div>
+    </div>
+
+    <!-- Phase 3: JARVIS Title -->
+    <div id="phaseTitle" class="phase">
+      <div class="title-wrap">
+        <div class="title-glitch" id="titleGlitch" data-text="J.A.R.V.I.S">J.A.R.V.I.S</div>
+        <div class="title-sub" id="titleSub"></div>
+        <div class="title-bar-wrap"><div class="title-bar" id="titleBar"></div></div>
+        <div class="title-status" id="titleStatus">INITIALIZING...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════
+       MAIN APP
+  ═══════════════════════════════ -->
+  <div id="app" class="hidden">
+    <div class="hud-scene">
+
+      <div class="scanlines"></div>
+      <div class="noise-overlay"></div>
+
+      <!-- TOP BAR -->
+      <div class="top-bar">
+        <div class="tb-left">
+          <span class="tb-tag green blink-slow">● ONLINE</span>
+          <span class="tb-tag">SYS::SECURE</span>
+        </div>
+        <div class="tb-center">
+          <div class="tb-title" data-text="J.A.R.V.I.S">J.A.R.V.I.S</div>
+          <div class="tb-sub">IRON MAN AI // FREE INTELLIGENCE CORE // NO API REQUIRED</div>
+        </div>
+        <div class="tb-right">
+          <div class="tb-clock" id="tbClock">00:00:00</div>
+          <div class="tb-tag" id="tbDate">--/--/----</div>
+        </div>
+      </div>
+
+      <!-- MAIN HUD -->
+      <div class="hud-main">
+
+        <!-- LEFT EYE PANEL -->
+        <div class="eye-panel left-eye">
+          <div class="eye-shell">
+            <canvas id="leftEyeCanvas" width="140" height="80"></canvas>
+            <div class="eye-scan"></div>
+            <div class="eye-label">L-OPTIC</div>
+          </div>
+          <div class="panel-section">
+            <div class="ps-title">// SYSTEMS</div>
+            <div class="ps-row"><span>NEURAL</span><span class="green">ACTIVE</span></div>
+            <div class="ps-row"><span>VOICE</span><span id="psVoice" class="green">READY</span></div>
+            <div class="ps-row"><span>BRAIN</span><span class="green">LOADED</span></div>
+            <div class="ps-row"><span>SHIELD</span><span class="yel">ARMED</span></div>
+          </div>
+          <div class="panel-section">
+            <div class="ps-title">// VITALS</div>
+            <div class="vbar-row"><span>CPU</span><div class="vbar"><div class="vfill" id="vCPU" style="width:0%"></div></div></div>
+            <div class="vbar-row"><span>MEM</span><div class="vbar"><div class="vfill" style="width:62%"></div></div></div>
+            <div class="vbar-row"><span>NET</span><div class="vbar"><div class="vfill" style="width:89%"></div></div></div>
+          </div>
+          <div class="uptime-box">
+            <div class="ps-title">// UPTIME</div>
+            <div class="uptime-val" id="uptimeVal">00:00:00</div>
+          </div>
+        </div>
+
+        <!-- CENTER MAIN -->
+        <div class="center-hud">
+
+          <!-- 3D EARTH -->
+          <div class="earth-wrap">
+            <canvas id="earthCanvas" width="200" height="200"></canvas>
+            <div class="earth-label">GLOBAL INTELLIGENCE NETWORK</div>
+          </div>
+
+          <!-- IRON MAN ORB -->
+          <div class="im-orb-wrap">
+            <div class="im-orb" id="imOrb">
+              <div class="im-ring ir1"></div>
+              <div class="im-ring ir2"></div>
+              <div class="im-ring ir3"></div>
+              <canvas id="orbRadar" width="140" height="140"></canvas>
+              <div class="im-core" id="imCore">
+                <div class="im-inner"></div>
+                <div class="im-arc" id="imArc">
+                  <div class="arc-r a1"></div>
+                  <div class="arc-r a2"></div>
+                  <div class="arc-r a3"></div>
+                  <div class="arc-center"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STATUS -->
+          <div class="im-status" id="imStatus">
+            <span class="sc blink-cur">▮</span> SAY "HEY JARVIS" TO ACTIVATE
+          </div>
+
+          <!-- WAVE -->
+          <div class="wave-line hidden" id="waveLine">
+            <div class="wl-b" style="animation-delay:0.00s"></div>
+            <div class="wl-b" style="animation-delay:0.06s"></div>
+            <div class="wl-b" style="animation-delay:0.12s"></div>
+            <div class="wl-b" style="animation-delay:0.18s"></div>
+            <div class="wl-b" style="animation-delay:0.24s"></div>
+            <div class="wl-b" style="animation-delay:0.09s"></div>
+            <div class="wl-b" style="animation-delay:0.15s"></div>
+            <div class="wl-b" style="animation-delay:0.21s"></div>
+            <div class="wl-b" style="animation-delay:0.03s"></div>
+          </div>
+
+          <!-- TERMINAL -->
+          <div class="im-terminal">
+            <div class="imt-bar">
+              <span class="imt-dot r"></span>
+              <span class="imt-dot y"></span>
+              <span class="imt-dot g"></span>
+              <span class="imt-title">JARVIS_BRAIN.log</span>
+            </div>
+            <div class="imt-body">
+              <div class="imt-prompt">jarvis@iron-core:~$</div>
+              <div class="imt-out" id="imtOut">Booting intelligence matrix...</div>
+              <span class="imt-cur">█</span>
+            </div>
+          </div>
+
+          <!-- ACTIVATE BUTTON -->
+          <button class="im-btn" id="imBtn" onclick="toggleListen()">
+            <div class="im-btn-glow"></div>
+            <span id="imBtnLabel">[ ACTIVATE JARVIS ]</span>
+          </button>
+
+        </div>
+
+        <!-- RIGHT EYE PANEL -->
+        <div class="eye-panel right-eye">
+          <div class="eye-shell">
+            <canvas id="rightEyeCanvas" width="140" height="80"></canvas>
+            <div class="eye-scan"></div>
+            <div class="eye-label">R-OPTIC</div>
+          </div>
+          <div class="panel-section">
+            <div class="ps-title">// CMD LOG</div>
+            <div class="cmd-log" id="cmdLog">
+              <div class="cl-entry">&gt; boot OK</div>
+              <div class="cl-entry">&gt; brain loaded</div>
+              <div class="cl-entry">&gt; voice ready</div>
+              <div class="cl-entry blink">&gt; _</div>
+            </div>
+          </div>
+          <div class="panel-section">
+            <div class="ps-title">// QUICK OPS</div>
+            <div class="quick-ops">
+              <div class="qop" onclick="quickCmd('what time is it')">⏱ TIME</div>
+              <div class="qop" onclick="quickCmd('what is the weather')">🌤 WEATHER</div>
+              <div class="qop" onclick="quickCmd('open youtube')">▶ YOUTUBE</div>
+              <div class="qop" onclick="quickCmd('tell me a joke')">😄 JOKE</div>
+              <div class="qop" onclick="quickCmd('tell me a fun fact')">💡 FACT</div>
+              <div class="qop" onclick="quickCmd('what can you do')">❓ HELP</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BOTTOM BAR -->
+      <div class="bot-bar">
+        <div class="bb-stat"><div class="bb-l">VOICE</div><div class="bb-v" id="bbVoice">STANDBY</div></div>
+        <div class="bb-stat"><div class="bb-l">BRAIN</div><div class="bb-v">OFFLINE-AI</div></div>
+        <div class="bb-stat"><div class="bb-l">EARTH</div><div class="bb-v">MONITORING</div></div>
+        <div class="bb-stat"><div class="bb-l">SHIELD</div><div class="bb-v">ACTIVE</div></div>
+      </div>
+
+      <!-- CORNERS -->
+      <div class="hud-corner tl"></div>
+      <div class="hud-corner tr"></div>
+      <div class="hud-corner bl"></div>
+      <div class="hud-corner br"></div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+  </html>
